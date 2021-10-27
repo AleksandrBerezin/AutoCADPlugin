@@ -24,5 +24,11 @@ namespace Gear
         {
             InitializeComponent();
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Один или несколько параметров выходят за пределы заданных диапазонов.",
+                "Построение модели", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 }

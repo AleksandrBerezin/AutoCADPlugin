@@ -5,8 +5,83 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Gear"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Моделирование зубчатой шестерни" Height="450" Width="667"
+        Icon="Resources/Gear.png">
+    <Window.Resources>
+        <Style x:Key="TextBoxStyle">
+            <Setter Property="TextBox.Width" Value="120"/>
+            <Setter Property="TextBox.Height" Value="23"/>
+            <Setter Property="TextBox.Margin" Value="3"/>
+            <Setter Property="TextBox.VerticalContentAlignment" Value="Center"/>
+            <Setter Property="TextBox.VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="TitleTextBoxStyle" BasedOn="{StaticResource TextBoxStyle}">
+            <Setter Property="TextBox.IsReadOnly" Value="True"/>
+            <Setter Property="TextBox.HorizontalContentAlignment" Value="Right"/>
+            <Setter Property="TextBox.BorderThickness" Value="0"/>
+        </Style>
+
+        <Style x:Key="LimitsTextBoxStyle" BasedOn="{StaticResource TitleTextBoxStyle}">
+            <Setter Property="TextBox.Foreground" Value="DarkGray"/>
+            <Setter Property="TextBox.Height" Value="15"/>
+            <Setter Property="TextBox.Margin" Value="0"/>
+        </Style>
+
+        <Style x:Key="ValueTextBoxStyle" BasedOn="{StaticResource TextBoxStyle}">
+            <Setter Property="TextBox.VerticalAlignment" Value="Top"/>
+        </Style>
+    </Window.Resources>
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="126"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <TextBox Text="Диаметр шестерни D:" Style="{StaticResource TitleTextBoxStyle}"/>
+            <TextBox Text="(24-60 мм)" Style="{StaticResource LimitsTextBoxStyle}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <TextBox Text="Диаметр отверстия d:" Style="{StaticResource TitleTextBoxStyle}" Grid.Row="1" Grid.Column="0"/>
+            <TextBox Text="(4-10 мм)" Style="{StaticResource LimitsTextBoxStyle}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="0">
+            <TextBox Text="Высота шестерни H:" Style="{StaticResource TitleTextBoxStyle}" Grid.Row="2" Grid.Column="0"/>
+            <TextBox Text="(10-20 мм)" Style="{StaticResource LimitsTextBoxStyle}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Grid.Column="0">
+            <TextBox Text="Длина зубца A:" Style="{StaticResource TitleTextBoxStyle}" Grid.Row="3" Grid.Column="0"/>
+            <TextBox Text="(8-20 мм)" Style="{StaticResource LimitsTextBoxStyle}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="4" Grid.Column="0">
+            <TextBox Text="Ширина зубца B:" Style="{StaticResource TitleTextBoxStyle}" Grid.Row="4" Grid.Column="0"/>
+            <TextBox Text="(5-10 мм)" Style="{StaticResource LimitsTextBoxStyle}"/>
+        </StackPanel>
+
+        <TextBox Text="80" Style="{StaticResource ValueTextBoxStyle}" Grid.Row="0" Grid.Column="1" Background="LightCoral" />
+        <TextBox Text="6" Style="{StaticResource ValueTextBoxStyle}" Grid.Row="1" Grid.Column="1"/>
+        <TextBox Text="15" Style="{StaticResource ValueTextBoxStyle}" Grid.Row="2" Grid.Column="1"/>
+        <TextBox Text="12" Style="{StaticResource ValueTextBoxStyle}" Grid.Row="3" Grid.Column="1"/>
+        <TextBox Text="8" Style="{StaticResource ValueTextBoxStyle}" Grid.Row="4" Grid.Column="1"/>
+
+        <Button Grid.Row="5" Grid.ColumnSpan="2" Grid.Column="0" Content=" Построить 3D-модель" Width="200" Height="40" Click="ButtonBase_OnClick"/>
+
+        <Image Source="Resources/GearModel.png" Grid.Column="2" Grid.Row="0" Grid.RowSpan="6" Stretch="Uniform"/>
     </Grid>
 </Window>
