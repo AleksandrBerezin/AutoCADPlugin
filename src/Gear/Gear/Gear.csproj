@@ -40,12 +40,15 @@
   <ItemGroup>
     <Reference Include="AcCoreMgd">
       <HintPath>..\..\..\..\..\..\..\..\Autodesk\ObjectARX_for_AutoCAD_2022_Win_64bit_dlm\inc\AcCoreMgd.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="AcDbMgd">
       <HintPath>..\..\..\..\..\..\..\..\Autodesk\ObjectARX_for_AutoCAD_2022_Win_64bit_dlm\inc\AcDbMgd.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="AcMgd">
       <HintPath>..\..\..\..\..\..\..\..\Autodesk\ObjectARX_for_AutoCAD_2022_Win_64bit_dlm\inc\AcMgd.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
@@ -90,9 +93,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AutoCADConnector.cs" />
     <Compile Include="GearBuilder.cs" />
-    <Compile Include="GearParameters.cs" />
     <Compile Include="MainVM.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -104,13 +105,13 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Parameter.cs" />
+    <Compile Include="GearParameter.cs" />
     <Compile Include="ParameterControl.xaml.cs">
       <DependentUpon>ParameterControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ParameterEnumExtension.cs" />
     <Compile Include="ParametersEnum.cs" />
-    <Compile Include="ParametersList.cs" />
+    <Compile Include="GearParametersList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

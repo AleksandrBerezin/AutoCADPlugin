@@ -34,7 +34,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <ItemsControl ItemsSource="{Binding Parameters}">
+        <ItemsControl ItemsSource="{Binding GearParameters}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <local:ParameterControl>
@@ -48,9 +48,9 @@
             Grid.Column="0"
             Orientation="Horizontal">
             <Button
-                Command="{Binding Path=BuildModelCommend}"
+                Command="{Binding Path=BuildModelCommand}"
                 Content="Build 3D-model"
-                IsEnabled="{Binding Path=IsValidData}"/>
+                IsEnabled="{Binding Path=IsValidData, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Command="{Binding Path=SetDefaultCommand}" Content="Set Default"/>
         </StackPanel>
 

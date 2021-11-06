@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="241"
     Height="70"
-    d:DataContext="{d:DesignInstance local:Parameter}"
+    d:DataContext="{d:DesignInstance local:GearParameter}"
     FontSize="16"
     mc:Ignorable="d">
     <UserControl.Resources>
@@ -32,6 +32,13 @@
         <Style x:Key="ValueTextBoxStyle" BasedOn="{StaticResource TextBoxStyle}">
             <Setter Property="TextBox.Margin" Value="0,6,6,6"/>
             <Setter Property="TextBox.VerticalAlignment" Value="Top"/>
+
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="TextBox.ToolTip" Value="{Binding RelativeSource={RelativeSource Self},
+                        Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </UserControl.Resources>
 
@@ -51,7 +58,9 @@
             Grid.Column="1"
             Style="{StaticResource ValueTextBoxStyle}">
             <TextBox.Text>
-                <Binding Path="Value" UpdateSourceTrigger="PropertyChanged">
+                <Binding
+                    Path="Value"
+                    UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <DataErrorValidationRule/>
                     </Binding.ValidationRules>

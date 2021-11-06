@@ -1,7 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using Autodesk.AutoCAD.Runtime;
-
-namespace Gear
+﻿namespace Gear
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
