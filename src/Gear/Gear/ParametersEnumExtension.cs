@@ -1,6 +1,6 @@
 ﻿namespace Gear
 {
-    public static class ParameterEnumExtension
+    public static class ParametersEnumExtension
     {
         public static string GetDescription(this ParametersEnum parameter)
         {

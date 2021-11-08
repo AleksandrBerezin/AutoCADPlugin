@@ -109,7 +109,7 @@
     <Compile Include="ParameterControl.xaml.cs">
       <DependentUpon>ParameterControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ParameterEnumExtension.cs" />
+    <Compile Include="ParametersEnumExtension.cs" />
     <Compile Include="ParametersEnum.cs" />
     <Compile Include="GearParametersList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

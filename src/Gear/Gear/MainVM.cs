@@ -64,7 +64,7 @@ namespace Gear
             GearParameters[ParametersEnum.GearDiameter].ValueChanged += OnValueChanged;
             foreach (var parameter in GearParameters)
             {
-                parameter.ValidDataChanged += OnValidDataDataChanged;
+                parameter.ValidDataChanged += OnValidDataChanged;
             }
         }
 
@@ -77,7 +77,7 @@ namespace Gear
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void OnValidDataDataChanged(object sender, EventArgs e)
+        private void OnValidDataChanged(object sender, EventArgs e)
         {
             if (GearParameters.Any(parameter => parameter.IsValidData == false))
             {
@@ -103,17 +103,17 @@ namespace Gear
                 var holeDiameter = GearParameters[ParametersEnum.HoleDiameter];
                 GearParameters[ParametersEnum.HoleDiameter] = new GearParameter(holeDiameter.Name, holeDiameter.Min,
                     currentGearDiameter / 4, holeDiameter.Value);
-                GearParameters[ParametersEnum.HoleDiameter].ValidDataChanged += OnValidDataDataChanged;
+                GearParameters[ParametersEnum.HoleDiameter].ValidDataChanged += OnValidDataChanged;
 
                 var toothLength = GearParameters[ParametersEnum.ToothLength];
                 GearParameters[ParametersEnum.ToothLength] = new GearParameter(toothLength.Name, currentGearDiameter / 5,
                     currentGearDiameter / 2, toothLength.Value);
-                GearParameters[ParametersEnum.ToothLength].ValidDataChanged += OnValidDataDataChanged;
+                GearParameters[ParametersEnum.ToothLength].ValidDataChanged += OnValidDataChanged;
 
                 var toothWidth = GearParameters[ParametersEnum.ToothWidth];
                 GearParameters[ParametersEnum.ToothWidth] = new GearParameter(toothWidth.Name, toothWidth.Min,
                     currentGearDiameter / 4, toothWidth.Value);
-                GearParameters[ParametersEnum.ToothWidth].ValidDataChanged += OnValidDataDataChanged;
+                GearParameters[ParametersEnum.ToothWidth].ValidDataChanged += OnValidDataChanged;
             }
         }
 
