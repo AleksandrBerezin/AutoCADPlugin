@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using GalaSoft.MvvmLight;
 
-namespace Gear
+namespace Core
 {
     /// <summary>
     /// Класс <see cref="GearParameter"/> хранит информацию о параметре шестерни

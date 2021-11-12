@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace Gear
+namespace Core
 {
     /// <summary>
     /// Класс для хранения списка параметров шестерни

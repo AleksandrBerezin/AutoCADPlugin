@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Core;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
@@ -11,6 +12,11 @@ namespace Gear
     public class MainVM : ObservableObject
     {
         #region PrivateFields
+
+        /// <summary>
+        /// Построитель модели
+        /// </summary>
+        private GearBuilder _builder = new GearBuilder();
 
         /// <summary>
         /// Хранит значение, показывающее, корректны ли введенные данные
@@ -42,7 +48,7 @@ namespace Gear
         /// <summary>
         /// Команда построения модели
         /// </summary>
-        public RelayCommand BuildModelCommand { get; }
+        public RelayCommand<GearParametersList> BuildModelCommand { get; }
 
         /// <summary>
         /// Команда установки значений параметров по умолчанию
@@ -58,7 +64,7 @@ namespace Gear
         /// </summary>
         public MainVM()
         {
-            BuildModelCommand = new RelayCommand(new GearBuilder().BuildGear);
+            BuildModelCommand = new RelayCommand<GearParametersList>(_builder.BuildGear);
             SetDefaultCommand = new RelayCommand(GearParameters.SetDefault);
 
             GearParameters[ParametersEnum.GearDiameter].ValueChanged += OnValueChanged;

@@ -1,5 +1,4 @@
 ﻿using Autodesk.AutoCAD.ApplicationServices;
-using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Runtime;
 using Gear;
 
@@ -10,21 +9,24 @@ namespace AutoCADConnector
     /// </summary>
     public class AutoCADConnector : IExtensionApplication
     {
+        ///// <summary>
+        ///// Поле для сервиса главного окна
+        ///// </summary>
+        //private IWindowService _windowService;
+
+        ///// <summary>
+        ///// Создает экземпляр класса <see cref="AutoCADConnector"/>
+        ///// </summary>
+        ///// <param name="windowService"></param>
+        //public AutoCADConnector(IWindowService windowService)
+        //{
+        //    _windowService = new WindowService();
+        //}
+
         [CommandMethod("StartGearPlugin")]
         public static void StartGearPlugin()
         {
-            // Get the current document and database, and start a transaction
-            Document acDoc = Application.DocumentManager.MdiActiveDocument;
-            Database acCurDb = acDoc.Database;
-
-            using (Transaction acTrans = acCurDb.TransactionManager.StartTransaction())
-            {
-                var window = new MainWindow();
-                //window.Show();
-                Application.ShowModalWindow(window);
-                // Save the new objects to the database
-                acTrans.Commit();
-            }
+            Application.ShowModalWindow(new MainWindow());
         }
 
         /// <inheritdoc/>

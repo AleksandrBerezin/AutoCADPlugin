@@ -1,4 +1,4 @@
-﻿namespace Gear
+﻿namespace Core
 {
     public static class ParametersEnumExtension
     {

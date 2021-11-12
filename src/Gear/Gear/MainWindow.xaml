@@ -49,6 +49,7 @@
             Orientation="Horizontal">
             <Button
                 Command="{Binding Path=BuildModelCommand}"
+                CommandParameter="{Binding Path=GearParameters}"
                 Content="Build 3D-model"
                 IsEnabled="{Binding Path=IsValidData, UpdateSourceTrigger=PropertyChanged}"/>
             <Button Command="{Binding Path=SetDefaultCommand}" Content="Set Default"/>
