@@ -21,41 +21,45 @@ namespace Gear
             var activeDocument = Application.DocumentManager.MdiActiveDocument;
             var database = activeDocument.Database;
 
-            // Начало транзакции
-            using (var transaction = database.TransactionManager.StartTransaction())
+            // Lock the new document
+            using (var documentLock = activeDocument.LockDocument())
             {
-                // Open the Block table record for read
-                var blockTable = transaction.GetObject(database.BlockTableId,
-                    OpenMode.ForRead) as BlockTable;
+                // Начало транзакции
+                using (var transaction = database.TransactionManager.StartTransaction())
+                {
+                    // Open the Block table record for read
+                    var blockTable = transaction.GetObject(database.BlockTableId,
+                        OpenMode.ForRead) as BlockTable;
 
-                // Open the Block table record Model space for write
-                var blockTableRecord = transaction.GetObject(blockTable[BlockTableRecord.ModelSpace],
-                    OpenMode.ForWrite) as BlockTableRecord;
+                    // Open the Block table record Model space for write
+                    var blockTableRecord = transaction.GetObject(blockTable[BlockTableRecord.ModelSpace],
+                        OpenMode.ForWrite) as BlockTableRecord;
 
-                // Получение параметров
-                var height = parameters[ParametersEnum.Height].Value;
-                var gearDiameter = parameters[ParametersEnum.GearDiameter].Value;
-                var holeDiameter = parameters[ParametersEnum.HoleDiameter].Value;
-                var toothLength = parameters[ParametersEnum.ToothLength].Value;
-                var toothWidth = parameters[ParametersEnum.ToothWidth].Value;
+                    // Получение параметров
+                    var height = parameters[ParametersEnum.Height].Value;
+                    var gearDiameter = parameters[ParametersEnum.GearDiameter].Value;
+                    var holeDiameter = parameters[ParametersEnum.HoleDiameter].Value;
+                    var toothLength = parameters[ParametersEnum.ToothLength].Value;
+                    var toothWidth = parameters[ParametersEnum.ToothWidth].Value;
 
-                // Создание шестерни с отверстием
-                var gear = CreateGearWithHole(gearDiameter, holeDiameter, height);
+                    // Создание шестерни с отверстием
+                    var gear = CreateGearWithHole(gearDiameter, holeDiameter, height);
 
-                // Создание углубления и вычитание его из объекта шестерни
-                var deepening = CreateDeepening(gearDiameter, holeDiameter);
-                SubtractDeepeningFromGear(gear, deepening, height);
-                
-                // Создание зубов и добавление к объекту шестерни
-                var tooth = Create3DTooth(gearDiameter, toothLength, toothWidth, height);
-                CreateTeethPolarArray(gear, tooth, 8);
+                    // Создание углубления и вычитание его из объекта шестерни
+                    var deepening = CreateDeepening(gearDiameter, holeDiameter);
+                    SubtractDeepeningFromGear(gear, deepening, height);
 
-                // Добавление нового объекта в таблицу
-                blockTableRecord.AppendEntity(gear);
-                transaction.AddNewlyCreatedDBObject(gear, true);
+                    // Создание зубов и добавление к объекту шестерни
+                    var tooth = Create3DTooth(gearDiameter, toothLength, toothWidth, height);
+                    CreateTeethPolarArray(gear, tooth, 8);
 
-                // Сохранение изменений в базе данных
-                transaction.Commit();
+                    // Добавление нового объекта в таблицу
+                    blockTableRecord.AppendEntity(gear);
+                    transaction.AddNewlyCreatedDBObject(gear, true);
+
+                    // Сохранение изменений в базе данных
+                    transaction.Commit();
+                }
             }
         }
 

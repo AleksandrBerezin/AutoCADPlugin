@@ -16,7 +16,7 @@ namespace Gear
         /// <summary>
         /// Построитель модели
         /// </summary>
-        private GearBuilder _builder = new GearBuilder();
+        private readonly GearBuilder _builder = new GearBuilder();
 
         /// <summary>
         /// Хранит значение, показывающее, корректны ли введенные данные

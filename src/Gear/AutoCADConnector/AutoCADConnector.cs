@@ -24,9 +24,9 @@ namespace AutoCADConnector
         //}
 
         [CommandMethod("StartGearPlugin")]
-        public static void StartGearPlugin()
+        public static async void StartGearPlugin()
         {
-            Application.ShowModalWindow(new MainWindow());
+            Application.ShowModelessWindow(new MainWindow());
         }
 
         /// <inheritdoc/>
