@@ -7,7 +7,7 @@ namespace Core
     /// <summary>
     /// Класс <see cref="GearParameter"/> хранит информацию о параметре шестерни
     /// </summary>
-    public class GearParameter : ObservableObject, IDataErrorInfo
+    public class GearParameter : ObservableObject, IDataErrorInfo, ICloneable
     {
         #region PrivateFields
         
@@ -85,6 +85,9 @@ namespace Core
             }
         }
 
+        /// <inheritdoc/>
+        public string Error => string.Empty;
+
         #endregion
 
         #region Events
@@ -121,6 +124,34 @@ namespace Core
 
         #endregion
 
+        #region Methods
+
+        /// <inheritdoc/>
+        public override bool Equals(object obj)
+        {
+            var parameter = obj as GearParameter;
+
+            if (parameter == null)
+            {
+                return false;
+            }
+
+            if (parameter.Name == Name && parameter.Min == Min && parameter.Max == Max && parameter.Value == Value)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <inheritdoc/>
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+
+        #endregion
+
         #region Validators
 
         /// <inheritdoc/>
@@ -147,9 +178,6 @@ namespace Core
                 return error;
             }
         }
-
-        /// <inheritdoc/>
-        public string Error => string.Empty;
 
         #endregion
     }

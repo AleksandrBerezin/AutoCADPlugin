@@ -38,6 +38,15 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AcCoreMgd">
+      <HintPath>..\..\..\..\..\..\..\..\Autodesk\ObjectARX_for_AutoCAD_2022_Win_64bit_dlm\inc\AcCoreMgd.dll</HintPath>
+    </Reference>
+    <Reference Include="AcDbMgd">
+      <HintPath>..\..\..\..\..\..\..\..\Autodesk\ObjectARX_for_AutoCAD_2022_Win_64bit_dlm\inc\AcDbMgd.dll</HintPath>
+    </Reference>
+    <Reference Include="AcMgd">
+      <HintPath>..\..\..\..\..\..\..\..\Autodesk\ObjectARX_for_AutoCAD_2022_Win_64bit_dlm\inc\AcMgd.dll</HintPath>
+    </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>

@@ -14,7 +14,7 @@ namespace Builder
         /// <summary>
         /// Номер объекта
         /// </summary>
-        private ObjectId _gearId = ObjectId.Null;
+        private ObjectId _gearId;
 
         /// <summary>
         /// Удаление старого объекта из документа
@@ -22,7 +22,7 @@ namespace Builder
         /// <param name="transaction"></param>
         private void ClearDocument(Transaction transaction)
         {
-            if (_gearId == ObjectId.Null)
+            if (_gearId == new ObjectId())
             {
                 return;
             }
