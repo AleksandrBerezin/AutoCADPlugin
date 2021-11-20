@@ -12,6 +12,30 @@ namespace Gear
     public class GearBuilder
     {
         /// <summary>
+        /// Номер объекта
+        /// </summary>
+        private ObjectId _gearId = ObjectId.Null;
+
+        /// <summary>
+        /// Удаление старого объекта из документа
+        /// </summary>
+        /// <param name="transaction"></param>
+        private void ClearDocument(Transaction transaction)
+        {
+            if (_gearId == ObjectId.Null)
+            {
+                return;
+            }
+
+            var activeDocument = Application.DocumentManager.MdiActiveDocument;
+            var gear = transaction.GetObject(_gearId, OpenMode.ForWrite);
+            activeDocument.SendStringToExecute("._zoom e ", false, false, false);
+            activeDocument.Editor.Regen();
+
+            gear.Erase(true);
+        }
+
+        /// <summary>
         /// Построение шестерни
         /// </summary>
         /// <param name="parameters"></param>
@@ -21,17 +45,16 @@ namespace Gear
             var activeDocument = Application.DocumentManager.MdiActiveDocument;
             var database = activeDocument.Database;
 
-            // Lock the new document
+            // Блокирование документа
             using (var documentLock = activeDocument.LockDocument())
             {
                 // Начало транзакции
                 using (var transaction = database.TransactionManager.StartTransaction())
                 {
-                    // Open the Block table record for read
+                    ClearDocument(transaction);
+                    
                     var blockTable = transaction.GetObject(database.BlockTableId,
                         OpenMode.ForRead) as BlockTable;
-
-                    // Open the Block table record Model space for write
                     var blockTableRecord = transaction.GetObject(blockTable[BlockTableRecord.ModelSpace],
                         OpenMode.ForWrite) as BlockTableRecord;
 
@@ -56,6 +79,8 @@ namespace Gear
                     // Добавление нового объекта в таблицу
                     blockTableRecord.AppendEntity(gear);
                     transaction.AddNewlyCreatedDBObject(gear, true);
+                    
+                    _gearId = gear.Id;
 
                     // Сохранение изменений в базе данных
                     transaction.Commit();
