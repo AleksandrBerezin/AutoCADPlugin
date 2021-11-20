@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Builder;
 using Core;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;

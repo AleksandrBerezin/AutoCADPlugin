@@ -4,7 +4,7 @@ using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Geometry;
 using Core;
 
-namespace Gear
+namespace Builder
 {
     /// <summary>
     /// Класс для постройки модели зубчатой шестерни

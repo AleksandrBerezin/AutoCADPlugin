@@ -2,12 +2,12 @@
     x:Class="Gear.ParameterControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:core="clr-namespace:Core;assembly=Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:Gear"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="241"
     Height="70"
-    d:DataContext="{d:DesignInstance local:GearParameter}"
+    d:DataContext="{d:DesignInstance core:GearParameter}"
     FontSize="16"
     mc:Ignorable="d">
     <UserControl.Resources>
@@ -58,9 +58,7 @@
             Grid.Column="1"
             Style="{StaticResource ValueTextBoxStyle}">
             <TextBox.Text>
-                <Binding
-                    Path="Value"
-                    UpdateSourceTrigger="PropertyChanged">
+                <Binding Path="Value" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
                         <DataErrorValidationRule/>
                     </Binding.ValidationRules>

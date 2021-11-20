@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCADConnector", "AutoCAD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{237249EF-409D-4697-BA53-46C6ED457D09}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Builder", "GearBuilder\Builder.csproj", "{0EC9A5FF-AE96-455B-8F02-2E629DB57D48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCore", "TestCore\TestCore.csproj", "{052D035E-D630-445E-8C27-DF82A3BB0F1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{237249EF-409D-4697-BA53-46C6ED457D09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{237249EF-409D-4697-BA53-46C6ED457D09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{237249EF-409D-4697-BA53-46C6ED457D09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EC9A5FF-AE96-455B-8F02-2E629DB57D48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EC9A5FF-AE96-455B-8F02-2E629DB57D48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EC9A5FF-AE96-455B-8F02-2E629DB57D48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EC9A5FF-AE96-455B-8F02-2E629DB57D48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{052D035E-D630-445E-8C27-DF82A3BB0F1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{052D035E-D630-445E-8C27-DF82A3BB0F1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{052D035E-D630-445E-8C27-DF82A3BB0F1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{052D035E-D630-445E-8C27-DF82A3BB0F1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

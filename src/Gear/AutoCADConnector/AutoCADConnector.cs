@@ -9,20 +9,6 @@ namespace AutoCADConnector
     /// </summary>
     public class AutoCADConnector : IExtensionApplication
     {
-        ///// <summary>
-        ///// Поле для сервиса главного окна
-        ///// </summary>
-        //private IWindowService _windowService;
-
-        ///// <summary>
-        ///// Создает экземпляр класса <see cref="AutoCADConnector"/>
-        ///// </summary>
-        ///// <param name="windowService"></param>
-        //public AutoCADConnector(IWindowService windowService)
-        //{
-        //    _windowService = new WindowService();
-        //}
-
         [CommandMethod("StartGearPlugin")]
         public static void StartGearPlugin()
         {
