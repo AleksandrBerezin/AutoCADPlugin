@@ -1,7 +1,15 @@
 ﻿namespace Core
 {
+    /// <summary>
+    /// Класс, расширяющий возможности перечисление <see cref="ParametersEnum"/>
+    /// </summary>
     public static class ParametersEnumExtension
     {
+        /// <summary>
+        /// Возвращает текстовое описание параметра
+        /// </summary>
+        /// <param name="parameter"></param>
+        /// <returns></returns>
         public static string GetDescription(this ParametersEnum parameter)
         {
             switch (parameter)
