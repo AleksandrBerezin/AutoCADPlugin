@@ -34,6 +34,10 @@
                 {
                     return "Tooth Width \"B\":";
                 }
+                case ParametersEnum.TeethCount:
+                {
+                    return "Teeth Count:";
+                }
                 default:
                 {
                     return "Parameter";

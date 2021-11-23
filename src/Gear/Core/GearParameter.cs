@@ -119,7 +119,8 @@ namespace Core
             Min = min;
             Max = max;
             Value = value;
-            Limits = $"({Min}-{Max} mm)";
+
+            Limits = Name == ParametersEnum.TeethCount ? $"({Min}-{Max})" : $"({Min}-{Max} mm)";
         }
 
         #endregion

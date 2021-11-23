@@ -22,16 +22,16 @@ namespace Builder
         /// <param name="transaction"></param>
         private void ClearDocument(Transaction transaction)
         {
+            var activeDocument = Application.DocumentManager.MdiActiveDocument;
+            activeDocument.SendStringToExecute("._zoom e ", false, false, false);
+            activeDocument.Editor.Regen();
+
             if (_gearId == new ObjectId())
             {
                 return;
             }
-
-            var activeDocument = Application.DocumentManager.MdiActiveDocument;
+            
             var gear = transaction.GetObject(_gearId, OpenMode.ForWrite);
-            activeDocument.SendStringToExecute("._zoom e ", false, false, false);
-            activeDocument.Editor.Regen();
-
             gear.Erase(true);
         }
 
@@ -64,6 +64,7 @@ namespace Builder
                     var holeDiameter = parameters[ParametersEnum.HoleDiameter].Value;
                     var toothLength = parameters[ParametersEnum.ToothLength].Value;
                     var toothWidth = parameters[ParametersEnum.ToothWidth].Value;
+                    var teethCount = parameters[ParametersEnum.TeethCount].Value;
 
                     // Создание шестерни с отверстием
                     var gear = CreateGearWithHole(gearDiameter, holeDiameter, height);
@@ -74,7 +75,7 @@ namespace Builder
 
                     // Создание зубов и добавление к объекту шестерни
                     var tooth = Create3DTooth(gearDiameter, toothLength, toothWidth, height);
-                    CreateTeethPolarArray(gear, tooth, 8);
+                    CreateTeethPolarArray(gear, tooth, teethCount);
 
                     // Добавление нового объекта в таблицу
                     blockTableRecord.AppendEntity(gear);

@@ -9,6 +9,7 @@
         HoleDiameter,
         Height,
         ToothLength,
-        ToothWidth
+        ToothWidth,
+        TeethCount
     }
 }
