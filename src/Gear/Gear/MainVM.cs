@@ -107,6 +107,7 @@ namespace Gear
         {
             var currentGearDiameter = GearParameters[ParametersEnum.GearDiameter].Value;
 
+            //TODO: Опустить зависимости в модель.
             var holeDiameter = GearParameters[ParametersEnum.HoleDiameter];
             GearParameters[ParametersEnum.HoleDiameter] = new GearParameter(holeDiameter.Name, holeDiameter.Min,
                 currentGearDiameter / 4, holeDiameter.Value);

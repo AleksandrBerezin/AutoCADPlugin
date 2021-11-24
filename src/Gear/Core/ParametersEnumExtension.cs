@@ -12,6 +12,7 @@
         /// <returns></returns>
         public static string GetDescription(this ParametersEnum parameter)
         {
+            //TODO: Description к значениям перечисления
             switch (parameter)
             {
                 case ParametersEnum.GearDiameter:
