@@ -43,7 +43,7 @@ namespace Core
             Add(new GearParameter(ParametersEnum.Height, 10, 20, 15));
             Add(new GearParameter(ParametersEnum.ToothLength, 8, 20, 12));
             Add(new GearParameter(ParametersEnum.ToothWidth, 5, 10, 8));
-            Add(new GearParameter(ParametersEnum.TeethCount, 6, 8, 8));
+            Add(new GearParameter(ParametersEnum.TeethCount, 6, 10, 8));
         }
     }
 }

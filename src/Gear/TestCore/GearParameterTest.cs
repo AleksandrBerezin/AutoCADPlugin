@@ -208,5 +208,28 @@ namespace TestCore
             // Assert
             Assert.IsFalse(!isEqual);
         }
+
+        private const string TestConstructor_CheckMinMaxLimits_ReturnValue_TestName =
+            "При вызове конструктора для параметра {0} для ограничений от {1} до {2} " +
+            "строка с ограничениями равняется {3}";
+
+        [TestCase(ParametersEnum.GearDiameter, 40, 20, 30, "Error", TestName =
+            TestConstructor_CheckMinMaxLimits_ReturnValue_TestName)]
+        [TestCase(ParametersEnum.GearDiameter, 40, 20, 30, "Error", TestName =
+            TestConstructor_CheckMinMaxLimits_ReturnValue_TestName)]
+        [TestCase(ParametersEnum.GearDiameter, 24, 60, 40, "(24-60 mm)", TestName =
+            TestConstructor_CheckMinMaxLimits_ReturnValue_TestName)]
+        [TestCase(ParametersEnum.TeethCount, 6, 10, 8, "(6-10)", TestName =
+            TestConstructor_CheckMinMaxLimits_ReturnValue_TestName)]
+        public void TestConstructor_CheckMinMaxLimits_ReturnValue(ParametersEnum name, int min,
+            int max, int value, string expectedLimits)
+        {
+            // Act
+            var parameter = new GearParameter(name, min, max, value);
+            var actual = parameter.Limits;
+
+            // Assert
+            Assert.AreEqual(expectedLimits, actual);
+        }
     }
 }

@@ -120,6 +120,12 @@ namespace Core
             Max = max;
             Value = value;
 
+            if (Min > Max || Max == 0)
+            {
+                Limits = "Error";
+                return;
+            }
+
             Limits = Name == ParametersEnum.TeethCount ? $"({Min}-{Max})" : $"({Min}-{Max} mm)";
         }
 
