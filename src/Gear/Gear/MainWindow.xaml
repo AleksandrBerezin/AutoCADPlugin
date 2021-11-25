@@ -10,6 +10,8 @@
     Height="501"
     MinWidth="665"
     MinHeight="501"
+    MaxWidth="665"
+    MaxHeight="501"
     d:DataContext="{d:DesignInstance local:MainVM}"
     FontSize="16"
     Icon="Resources/GearIcon.png"

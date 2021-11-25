@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Core
@@ -8,6 +9,17 @@ namespace Core
     /// </summary>
     public class GearParametersList : ObservableCollection<GearParameter>
     {
+        #region Events
+
+        /// <summary>
+        /// Событие, уведомляющее об изменении корректности введенных данных
+        /// </summary>
+        public event EventHandler ValidDataChanged;
+
+        #endregion
+
+        #region Constructors
+
         /// <summary>
         /// Создает экземпляр класса <see cref="GearParametersList"/>
         /// </summary>
@@ -16,8 +28,13 @@ namespace Core
             SetDefault();
         }
 
+        #endregion
+
+        #region Indexers
+
         /// <summary>
-        /// Индексатор, позволяющий получать элементы списка по значению <see cref="ParametersEnum"/>
+        /// Индексатор, позволяющий получать элементы списка по значению
+        /// <see cref="ParametersEnum"/>
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
@@ -32,6 +49,10 @@ namespace Core
             }
         }
 
+        #endregion
+
+        #region Methods
+
         /// <summary>
         /// Задает список параметров со значениями по умолчанию
         /// </summary>
@@ -44,6 +65,63 @@ namespace Core
             Add(new GearParameter(ParametersEnum.ToothLength, 8, 20, 12));
             Add(new GearParameter(ParametersEnum.ToothWidth, 5, 10, 8));
             Add(new GearParameter(ParametersEnum.TeethCount, 6, 10, 8));
+
+            this[ParametersEnum.GearDiameter].ValueChanged += OnGearDiameterChanged;
+            this[ParametersEnum.ToothWidth].ValueChanged += OnToothWidthChanged;
+
+            foreach (var parameter in this)
+            {
+                parameter.ValidDataChanged += ValidDataChanged;
+            }
         }
+
+        /// <summary>
+        /// Обработчик события изменения значения диаметра шестернни
+        /// Для зависимых параметров устанавливаются новые ограничения
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnGearDiameterChanged(object sender, EventArgs e)
+        {
+            var currentGearDiameter = this[ParametersEnum.GearDiameter].Value;
+
+            var holeDiameter = this[ParametersEnum.HoleDiameter];
+            this[ParametersEnum.HoleDiameter] = new GearParameter(holeDiameter.Name,
+                holeDiameter.Min, currentGearDiameter / 4, holeDiameter.Value);
+            this[ParametersEnum.HoleDiameter].ValidDataChanged += ValidDataChanged;
+
+            var toothLength = this[ParametersEnum.ToothLength];
+            this[ParametersEnum.ToothLength] = new GearParameter(toothLength.Name,
+                currentGearDiameter / 5, currentGearDiameter / 2, toothLength.Value);
+            this[ParametersEnum.ToothLength].ValidDataChanged += ValidDataChanged;
+
+            var toothWidth = this[ParametersEnum.ToothWidth];
+            this[ParametersEnum.ToothWidth] = new GearParameter(toothWidth.Name,
+                toothWidth.Min, currentGearDiameter / 4, toothWidth.Value);
+            this[ParametersEnum.ToothWidth].ValidDataChanged += ValidDataChanged;
+            this[ParametersEnum.ToothWidth].ValueChanged += OnToothWidthChanged;
+
+            OnToothWidthChanged(sender, e);
+        }
+
+        /// <summary>
+        /// Обработчик события изменения значения ширины зубца
+        /// Для зависимых параметров устанавливаются новые ограничения
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnToothWidthChanged(object sender, EventArgs e)
+        {
+            var currentGearDiameter = this[ParametersEnum.GearDiameter].Value;
+            var toothWidth = this[ParametersEnum.ToothWidth];
+
+            var teethCount = this[ParametersEnum.TeethCount];
+            this[ParametersEnum.TeethCount] = new GearParameter(teethCount.Name,
+                teethCount.Min, currentGearDiameter * 2 / toothWidth.Value,
+                teethCount.Value);
+            this[ParametersEnum.TeethCount].ValidDataChanged += ValidDataChanged;
+        }
+
+        #endregion
     }
 }

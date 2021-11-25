@@ -1,4 +1,7 @@
-﻿namespace Core
+﻿using System.ComponentModel;
+using System.Linq;
+
+namespace Core
 {
     /// <summary>
     /// Класс, расширяющий возможности перечисление <see cref="ParametersEnum"/>
@@ -13,37 +16,16 @@
         public static string GetDescription(this ParametersEnum parameter)
         {
             //TODO: Description к значениям перечисления
-            switch (parameter)
+            var fieldInfo = parameter.GetType().GetField(parameter.ToString());
+            var description = parameter.ToString();
+
+            if (fieldInfo.GetCustomAttributes(typeof(DescriptionAttribute), false) is 
+                DescriptionAttribute[] attributes && attributes.Any())
             {
-                case ParametersEnum.GearDiameter:
-                {
-                    return "Gear Diameter \"D\":";
-                }
-                case ParametersEnum.HoleDiameter:
-                {
-                    return "Hole Diameter \"d\":";
-                }
-                case ParametersEnum.Height:
-                {
-                    return "Height \"H\":";
-                }
-                case ParametersEnum.ToothLength:
-                {
-                    return "Tooth Length \"A\":";
-                }
-                case ParametersEnum.ToothWidth:
-                {
-                    return "Tooth Width \"B\":";
-                }
-                case ParametersEnum.TeethCount:
-                {
-                    return "Teeth Count:";
-                }
-                default:
-                {
-                    return "Parameter";
-                }
+                description = attributes.First().Description;
             }
+
+            return description;
         }
     }
 }

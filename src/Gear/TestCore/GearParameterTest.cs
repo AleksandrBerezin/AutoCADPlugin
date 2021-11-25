@@ -6,8 +6,14 @@ namespace TestCore
     [TestFixture]
     public class GearParameterTest
     {
+        #region Constants
+
         private readonly GearParameter _testParameter =
             new GearParameter(ParametersEnum.GearDiameter, 24, 60, 40);
+
+        #endregion
+
+        #region Test Properties
 
         [TestCase(TestName = "Позитивный тест геттера Name")]
         public void TestNameGet_GoodScenario()
@@ -48,23 +54,8 @@ namespace TestCore
             Assert.AreEqual(expected, actual);
         }
 
-        [TestCase(TestName = "Позитивный тест геттера Value")]
-        public void TestValueGet_GoodScenario()
-        {
-            // Arrange
-            var expected = 50;
-
-            // Act
-            var parameter = _testParameter.Clone() as GearParameter;
-            parameter.Value = expected;
-            var actual = parameter.Value;
-
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestCase(TestName = "Позитивный тест сеттера Value")]
-        public void TestValueSet_GoodScenario()
+        [TestCase(TestName = "Позитивный тест геттера и сеттера Value")]
+        public void TestValueGetSet_GoodScenario()
         {
             // Arrange
             var expected = 50;
@@ -130,6 +121,37 @@ namespace TestCore
             Assert.AreEqual(expected, actual);
         }
 
+        #endregion
+
+        #region Test Constructors
+
+        private const string TestConstructor_CheckMinMaxLimits_ReturnValue_TestName =
+            "При вызове конструктора для параметра {0} для ограничений от {1} до {2} " +
+            "строка с ограничениями равняется {3}";
+
+        [TestCase(ParametersEnum.GearDiameter, 40, 20, 30, "Error",
+            TestName = TestConstructor_CheckMinMaxLimits_ReturnValue_TestName)]
+        [TestCase(ParametersEnum.GearDiameter, 40, 20, 30, "Error",
+            TestName = TestConstructor_CheckMinMaxLimits_ReturnValue_TestName)]
+        [TestCase(ParametersEnum.GearDiameter, 24, 60, 40, "(24-60 mm)",
+            TestName = TestConstructor_CheckMinMaxLimits_ReturnValue_TestName)]
+        [TestCase(ParametersEnum.TeethCount, 6, 10, 8, "(6-10)",
+            TestName = TestConstructor_CheckMinMaxLimits_ReturnValue_TestName)]
+        public void TestConstructor_CheckMinMaxLimits_ReturnValue(ParametersEnum name, int min,
+            int max, int value, string expectedLimits)
+        {
+            // Act
+            var parameter = new GearParameter(name, min, max, value);
+            var actual = parameter.Limits;
+
+            // Assert
+            Assert.AreEqual(expectedLimits, actual);
+        }
+
+        #endregion
+
+        #region Test Indexers
+
         private const string TestIndexer_ReturnValue_ErrorMessage =
             "Parameter GearDiameter should be more then 24 and less then 60 mm.";
 
@@ -138,9 +160,9 @@ namespace TestCore
 
         [TestCase(40, "", TestName =
             TestIndexer_ReturnValue_TestName)]
-        [TestCase(10, TestIndexer_ReturnValue_ErrorMessage, TestName = 
+        [TestCase(10, TestIndexer_ReturnValue_ErrorMessage, TestName =
             TestIndexer_ReturnValue_TestName)]
-        [TestCase(100, TestIndexer_ReturnValue_ErrorMessage, TestName = 
+        [TestCase(100, TestIndexer_ReturnValue_ErrorMessage, TestName =
             TestIndexer_ReturnValue_TestName)]
         public void TestIndexerGet_ReturnValue(int value, string errorMessage)
         {
@@ -155,8 +177,12 @@ namespace TestCore
             Assert.AreEqual(expected, actual);
         }
 
+        #endregion
+
+        #region Test Methods
+
         [TestCase(TestName = "При сравнении одинаковых объектов возращается истина")]
-        public void TestEquals_GoodScenario_ReturnTrue()
+        public void TestEqualsAndClone_GoodScenario_ReturnTrue()
         {
             // Arrange
             var expected = _testParameter;
@@ -195,41 +221,6 @@ namespace TestCore
             Assert.IsFalse(isEqual);
         }
 
-        [TestCase(TestName = "При клонировании объекта создается его точная копия")]
-        public void TestClone_GoodScenario_ReturnValue()
-        {
-            // Arrange
-            var expected = _testParameter;
-
-            // Act
-            var actual = _testParameter.Clone() as GearParameter;
-            var isEqual = actual.Equals(expected);
-
-            // Assert
-            Assert.IsFalse(!isEqual);
-        }
-
-        private const string TestConstructor_CheckMinMaxLimits_ReturnValue_TestName =
-            "При вызове конструктора для параметра {0} для ограничений от {1} до {2} " +
-            "строка с ограничениями равняется {3}";
-
-        [TestCase(ParametersEnum.GearDiameter, 40, 20, 30, "Error", TestName =
-            TestConstructor_CheckMinMaxLimits_ReturnValue_TestName)]
-        [TestCase(ParametersEnum.GearDiameter, 40, 20, 30, "Error", TestName =
-            TestConstructor_CheckMinMaxLimits_ReturnValue_TestName)]
-        [TestCase(ParametersEnum.GearDiameter, 24, 60, 40, "(24-60 mm)", TestName =
-            TestConstructor_CheckMinMaxLimits_ReturnValue_TestName)]
-        [TestCase(ParametersEnum.TeethCount, 6, 10, 8, "(6-10)", TestName =
-            TestConstructor_CheckMinMaxLimits_ReturnValue_TestName)]
-        public void TestConstructor_CheckMinMaxLimits_ReturnValue(ParametersEnum name, int min,
-            int max, int value, string expectedLimits)
-        {
-            // Act
-            var parameter = new GearParameter(name, min, max, value);
-            var actual = parameter.Limits;
-
-            // Assert
-            Assert.AreEqual(expectedLimits, actual);
-        }
+        #endregion
     }
 }

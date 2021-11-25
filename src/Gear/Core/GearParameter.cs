@@ -126,7 +126,9 @@ namespace Core
                 return;
             }
 
-            Limits = Name == ParametersEnum.TeethCount ? $"({Min}-{Max})" : $"({Min}-{Max} mm)";
+            Limits = Name == ParametersEnum.TeethCount ? 
+                $"({Min}-{Max})" :
+                $"({Min}-{Max} mm)";
         }
 
         #endregion
@@ -143,7 +145,8 @@ namespace Core
                 return false;
             }
 
-            if (parameter.Name == Name && parameter.Min == Min && parameter.Max == Max && parameter.Value == Value)
+            if (parameter.Name == Name && parameter.Min == Min && parameter.Max == Max && 
+                parameter.Value == Value)
             {
                 return true;
             }
