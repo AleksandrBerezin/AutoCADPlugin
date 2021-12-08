@@ -13,6 +13,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Builder", "GearBuilder\Buil
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCore", "TestCore\TestCore.csproj", "{052D035E-D630-445E-8C27-DF82A3BB0F1C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{E5B0147A-C86C-49E6-A0B3-04431C127DB2}"
+	ProjectSection(SolutionItems) = preProject
+		Libraries\AcCoreMgd.dll = Libraries\AcCoreMgd.dll
+		Libraries\AcDbMgd.dll = Libraries\AcDbMgd.dll
+		Libraries\AcMgd.dll = Libraries\AcMgd.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
