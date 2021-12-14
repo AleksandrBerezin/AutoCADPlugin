@@ -64,10 +64,8 @@ namespace Core
             Add(new GearParameter(ParametersEnum.Height, 10, 20, 15));
             Add(new GearParameter(ParametersEnum.ToothLength, 8, 20, 12));
             Add(new GearParameter(ParametersEnum.ToothWidth, 5, 10, 8));
-            Add(new GearParameter(ParametersEnum.TeethCount, 6, 10, 8));
 
             this[ParametersEnum.GearDiameter].ValueChanged += OnGearDiameterChanged;
-            this[ParametersEnum.ToothWidth].ValueChanged += OnToothWidthChanged;
 
             foreach (var parameter in this)
             {
@@ -99,27 +97,6 @@ namespace Core
             this[ParametersEnum.ToothWidth] = new GearParameter(toothWidth.Name,
                 toothWidth.Min, currentGearDiameter / 4, toothWidth.Value);
             this[ParametersEnum.ToothWidth].ValidDataChanged += ValidDataChanged;
-            this[ParametersEnum.ToothWidth].ValueChanged += OnToothWidthChanged;
-
-            OnToothWidthChanged(sender, e);
-        }
-
-        /// <summary>
-        /// Обработчик события изменения значения ширины зубца
-        /// Для зависимых параметров устанавливаются новые ограничения
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnToothWidthChanged(object sender, EventArgs e)
-        {
-            var currentGearDiameter = this[ParametersEnum.GearDiameter].Value;
-            var toothWidth = this[ParametersEnum.ToothWidth];
-
-            var teethCount = this[ParametersEnum.TeethCount];
-            this[ParametersEnum.TeethCount] = new GearParameter(teethCount.Name,
-                teethCount.Min, currentGearDiameter * 2 / toothWidth.Value,
-                teethCount.Value);
-            this[ParametersEnum.TeethCount].ValidDataChanged += ValidDataChanged;
         }
 
         #endregion

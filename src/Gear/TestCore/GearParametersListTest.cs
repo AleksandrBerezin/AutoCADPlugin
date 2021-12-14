@@ -54,28 +54,6 @@ namespace TestCore
             Assert.AreEqual(expected, actual);
         }
 
-        [TestCase(TestName = "При изменении значения ширины зубца, должно измениться" +
-                             " максимальное значение для количества зубцов")]
-        public void TestOnToothWidthChanged_ChangeMaxTeethCount()
-        {
-            // Arrange
-            var expected = 16;
-            
-            // Act
-            var parametersList = new GearParametersList
-            {
-                [ParametersEnum.ToothWidth] =
-                {
-                    Value = 5
-                }
-            };
-            var teethCount = parametersList[ParametersEnum.TeethCount];
-            var actual = teethCount.Max;
-
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
-
         private const string TestOnGearDiameterChanged_ChangeLimits_TestName =
             "При изменении значения диаметра шестерни на {3}, должны измениться" +
             " ограничения для параметра {0} на Min = {1} и Max = {2}";

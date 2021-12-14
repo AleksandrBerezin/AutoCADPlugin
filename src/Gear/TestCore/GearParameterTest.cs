@@ -135,8 +135,6 @@ namespace TestCore
             TestName = TestConstructor_CheckMinMaxLimits_ReturnValue_TestName)]
         [TestCase(ParametersEnum.GearDiameter, 24, 60, 40, "(24-60 mm)",
             TestName = TestConstructor_CheckMinMaxLimits_ReturnValue_TestName)]
-        [TestCase(ParametersEnum.TeethCount, 6, 10, 8, "(6-10)",
-            TestName = TestConstructor_CheckMinMaxLimits_ReturnValue_TestName)]
         public void TestConstructor_CheckMinMaxLimits_ReturnValue(ParametersEnum name, int min,
             int max, int value, string expectedLimits)
         {

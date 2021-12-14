@@ -16,8 +16,6 @@ namespace Core
         [Description("Tooth Length \"A\":")]
         ToothLength,
         [Description("Tooth Width \"B\":")]
-        ToothWidth,
-        [Description("Teeth Count:")]
-        TeethCount
+        ToothWidth
     }
 }
