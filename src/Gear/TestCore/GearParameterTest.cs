@@ -95,8 +95,8 @@ namespace TestCore
             Assert.AreEqual(expected, actual);
         }
 
-        [TestCase(TestName = "Позитивный тест геттера IsValidData")]
-        public void TestIsValidDataGet_GoodScenario()
+        [TestCase(TestName = "Позитивный тест геттера и сеттера IsValidData")]
+        public void TestIsValidDataGetSet_GoodScenario()
         {
             // Arrange
             var expected = true;

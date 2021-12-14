@@ -78,7 +78,7 @@ namespace Core
         public bool IsValidData
         {
             get => _isValidData;
-            private set
+            set
             {
                 Set(ref _isValidData, value);
                 ValidDataChanged?.Invoke(this, EventArgs.Empty);
