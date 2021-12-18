@@ -17,7 +17,7 @@ namespace Gear
         {
             if (e.Action == ValidationErrorEventAction.Added)
             {
-                ((GearParameter)this.DataContext).IsValidData = false;
+                ((Parameter)this.DataContext).IsValidData = false;
             }
         }
     }

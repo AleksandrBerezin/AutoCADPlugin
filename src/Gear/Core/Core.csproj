@@ -56,7 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GearParameter.cs" />
+    <Compile Include="Parameter.cs" />
     <Compile Include="GearParametersList.cs" />
     <Compile Include="ParametersEnum.cs" />
     <Compile Include="ParametersEnumExtension.cs" />

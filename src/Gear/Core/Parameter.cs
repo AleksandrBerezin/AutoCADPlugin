@@ -5,9 +5,9 @@ using GalaSoft.MvvmLight;
 namespace Core
 {
     /// <summary>
-    /// Класс <see cref="GearParameter"/> хранит информацию о параметре шестерни
+    /// Класс <see cref="Parameter"/> хранит информацию о параметре шестерни
     /// </summary>
-    public class GearParameter : ObservableObject, IDataErrorInfo, ICloneable
+    public class Parameter : ObservableObject, IDataErrorInfo, ICloneable
     {
         #region PrivateFields
         
@@ -107,13 +107,13 @@ namespace Core
         #region Constructors
 
         /// <summary>
-        /// Создает экземпляр класса <see cref="GearParameter"/>
+        /// Создает экземпляр класса <see cref="Parameter"/>
         /// </summary>
         /// <param name="name"></param>
         /// <param name="min"></param>
         /// <param name="max"></param>
         /// <param name="value"></param>
-        public GearParameter(ParametersEnum name, int min, int max, int value)
+        public Parameter(ParametersEnum name, int min, int max, int value)
         {
             Name = name;
             Min = min;
@@ -126,7 +126,9 @@ namespace Core
                 return;
             }
 
-            Limits = $"({Min}-{Max} mm)";
+            Limits = Name == ParametersEnum.TeethCount ? 
+                $"({Min}-{Max})" :
+                $"({Min}-{Max} mm)";
         }
 
         #endregion
@@ -136,7 +138,7 @@ namespace Core
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            var parameter = obj as GearParameter;
+            var parameter = obj as Parameter;
 
             if (parameter == null)
             {

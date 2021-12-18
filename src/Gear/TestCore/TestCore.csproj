@@ -70,7 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GearParametersListTest.cs" />
-    <Compile Include="GearParameterTest.cs" />
+    <Compile Include="ParameterTest.cs" />
     <Compile Include="ParametersEnumExtensionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

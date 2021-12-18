@@ -20,6 +20,8 @@ namespace TestCore
             TestName = TestGetDescription_ReturnValue_TestName)]
         [TestCase(ParametersEnum.ToothWidth, "Tooth Width \"B\":",
             TestName = TestGetDescription_ReturnValue_TestName)]
+        [TestCase(ParametersEnum.TeethCount, "Teeth Count:",
+            TestName = TestGetDescription_ReturnValue_TestName)]
         public void TestGetDescription_ReturnValue(ParametersEnum parameter, string expected)
         {
             // Act

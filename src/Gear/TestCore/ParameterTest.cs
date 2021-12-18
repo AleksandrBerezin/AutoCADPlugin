@@ -4,12 +4,12 @@ using NUnit.Framework;
 namespace TestCore
 {
     [TestFixture]
-    public class GearParameterTest
+    public class ParameterTest
     {
         #region Constants
 
-        private readonly GearParameter _testParameter =
-            new GearParameter(ParametersEnum.GearDiameter, 24, 60, 40);
+        private readonly Parameter _testParameter =
+            new Parameter(ParametersEnum.GearDiameter, 24, 60, 40);
 
         #endregion
 
@@ -61,7 +61,7 @@ namespace TestCore
             var expected = 50;
 
             // Act
-            var parameter = _testParameter.Clone() as GearParameter;
+            var parameter = _testParameter.Clone() as Parameter;
             parameter.Value = expected;
             var actual = parameter.Value;
 
@@ -135,11 +135,13 @@ namespace TestCore
             TestName = TestConstructor_CheckMinMaxLimits_ReturnValue_TestName)]
         [TestCase(ParametersEnum.GearDiameter, 24, 60, 40, "(24-60 mm)",
             TestName = TestConstructor_CheckMinMaxLimits_ReturnValue_TestName)]
+        [TestCase(ParametersEnum.TeethCount, 6, 10, 8, "(6-10)",
+            TestName = TestConstructor_CheckMinMaxLimits_ReturnValue_TestName)]
         public void TestConstructor_CheckMinMaxLimits_ReturnValue(ParametersEnum name, int min,
             int max, int value, string expectedLimits)
         {
             // Act
-            var parameter = new GearParameter(name, min, max, value);
+            var parameter = new Parameter(name, min, max, value);
             var actual = parameter.Limits;
 
             // Assert
@@ -168,8 +170,8 @@ namespace TestCore
             var expected = errorMessage;
 
             // Act
-            var parameter = new GearParameter(ParametersEnum.GearDiameter, 24, 60, value);
-            var actual = parameter[nameof(GearParameter.Value)];
+            var parameter = new Parameter(ParametersEnum.GearDiameter, 24, 60, value);
+            var actual = parameter[nameof(Parameter.Value)];
 
             // Assert
             Assert.AreEqual(expected, actual);
@@ -186,7 +188,7 @@ namespace TestCore
             var expected = _testParameter;
 
             // Act
-            var actual = _testParameter.Clone() as GearParameter;
+            var actual = _testParameter.Clone() as Parameter;
             var isEqual = actual.Equals(expected);
 
             // Assert
@@ -200,7 +202,7 @@ namespace TestCore
             var expected = _testParameter;
 
             // Act
-            var actual = _testParameter.Clone() as GearParameter;
+            var actual = _testParameter.Clone() as Parameter;
             actual.Value = 50;
             var isEqual = actual.Equals(expected);
 

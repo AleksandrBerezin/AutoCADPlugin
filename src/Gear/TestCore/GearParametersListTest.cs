@@ -26,7 +26,7 @@ namespace TestCore
         public void TestIndexerGet_ReturnValue()
         {
             // Arrange
-            var expected = new GearParameter(ParametersEnum.GearDiameter, 24, 60, 40);
+            var expected = new Parameter(ParametersEnum.GearDiameter, 24, 60, 40);
 
             // Act
             var parametersList = new GearParametersList();
@@ -41,7 +41,7 @@ namespace TestCore
         public void TestIndexerSet_GoodScenario()
         {
             // Arrange
-            var expected = new GearParameter(ParametersEnum.GearDiameter, 24, 60, 50);
+            var expected = new Parameter(ParametersEnum.GearDiameter, 24, 60, 50);
 
             // Act
             var parametersList = new GearParametersList
@@ -49,6 +49,28 @@ namespace TestCore
                 [ParametersEnum.GearDiameter] = expected
             };
             var actual = parametersList[ParametersEnum.GearDiameter];
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase(TestName = "При изменении значения ширины зубца, должно измениться" +
+                             " максимальное значение для количества зубцов")]
+        public void TestOnToothWidthChanged_ChangeMaxTeethCount()
+        {
+            // Arrange
+            var expected = 16;
+            
+            // Act
+            var parametersList = new GearParametersList
+            {
+                [ParametersEnum.ToothWidth] =
+                {
+                    Value = 5
+                }
+            };
+            var teethCount = parametersList[ParametersEnum.TeethCount];
+            var actual = teethCount.Max;
 
             // Assert
             Assert.AreEqual(expected, actual);
