@@ -1,14 +1,39 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Core
 {
     /// <summary>
     /// Класс для хранения списка параметров шестерни
     /// </summary>
-    public class GearParametersList : ObservableCollection<Parameter>
+    public class GearParametersList : ObservableCollection<Parameter>, INotifyPropertyChanged
     {
+        #region PublicProperties
+
+        private ToothShapeEnum _toothShapeEnum;
+
+        public ToothShapeEnum ToothShape
+        {
+            get => _toothShapeEnum;
+            set
+            {
+                _toothShapeEnum = value;
+                RaisePropertyChanged(nameof(ToothShape));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void RaisePropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
+        #endregion
+
         #region Events
 
         /// <summary>
@@ -73,6 +98,8 @@ namespace Core
             {
                 parameter.ValidDataChanged += ValidDataChanged;
             }
+
+            ToothShape = ToothShapeEnum.Trapezoid;
         }
 
         /// <summary>

@@ -6,12 +6,12 @@
     xmlns:local="clr-namespace:Gear"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Spur Gear Modeling"
-    Width="665"
-    Height="501"
-    MinWidth="665"
-    MinHeight="501"
-    MaxWidth="665"
-    MaxHeight="501"
+    Width="700"
+    Height="544"
+    MinWidth="700"
+    MinHeight="544"
+    MaxWidth="700"
+    MaxHeight="544"
     d:DataContext="{d:DesignInstance local:MainVM}"
     FontSize="16"
     Icon="Resources/GearIcon.png"
@@ -27,6 +27,7 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
@@ -45,9 +46,12 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
+        <local:ToothShapeControl Grid.Row="1" Grid.Column="0" DataContext="{Binding GearParameters}"/>
+
         <StackPanel
-            Grid.Row="1"
+            Grid.Row="2"
             Grid.Column="0"
+            Margin="0 6 0 0"
             Orientation="Horizontal">
             <Button
                 Command="{Binding Path=BuildModelCommand}"
@@ -59,7 +63,7 @@
 
         <Image
             Grid.Row="0"
-            Grid.RowSpan="2"
+            Grid.RowSpan="3"
             Grid.Column="1"
             Source="Resources/GearModel.png"
             Stretch="Uniform"/>

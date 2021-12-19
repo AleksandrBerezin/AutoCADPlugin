@@ -1,0 +1,51 @@
+﻿<UserControl
+    x:Class="Gear.ToothShapeControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:core="clr-namespace:Core;assembly=Core"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:Gear"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    Width="241"
+    Height="36"
+    d:DataContext="{d:DesignInstance core:GearParametersList}"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ObjectDataProvider
+            x:Key="DataProvider"
+            MethodName="GetValues"
+            ObjectType="{x:Type system:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="core:ToothShapeEnum"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <local:ToothShapeToImageSourceConverter x:Key="ShapeToImageSourceConverter"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="152"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Style="{StaticResource TitleTextBoxStyle}" Text="Tooth Shape:">
+            </TextBox>
+
+            <ComboBox
+                Grid.Column="1"
+                ItemsSource="{Binding Source={StaticResource DataProvider}}"
+                SelectedItem="{Binding Path=ToothShape, Mode=TwoWay}"
+                Style="{StaticResource ComboBoxStyle}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Image Height="24" Source="{Binding Path=.,
+                            Converter={StaticResource ShapeToImageSourceConverter}}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -85,6 +85,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ToothShapeToImageConverter.cs" />
+    <Compile Include="ToothShapeControl.xaml.cs">
+      <DependentUpon>ToothShapeControl.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Dictionaries\ComboBoxStyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dictionaries\TextBoxStyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -99,6 +111,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ParameterControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ToothShapeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -149,5 +165,11 @@
       <Name>Builder</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Trapezoid.png" />
+    <Resource Include="Resources\TrapezoidRectangle.png" />
+    <Resource Include="Resources\Triangle.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
