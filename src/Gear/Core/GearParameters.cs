@@ -3,33 +3,39 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using GalaSoft.MvvmLight;
 
 namespace Core
 {
     /// <summary>
     /// Класс для хранения списка параметров шестерни
     /// </summary>
-    public class GearParametersList : ObservableCollection<Parameter>, INotifyPropertyChanged
+    public class GearParameters : ObservableObject
     {
+        #region PrivateFields
+
+        /// <summary>
+        /// Форма зуба
+        /// </summary>
+        private ToothShapeEnum _toothShape;
+
+        #endregion
+
         #region PublicProperties
 
-        private ToothShapeEnum _toothShapeEnum;
+        /// <summary>
+        /// Список параметров
+        /// </summary>
+        public ObservableCollection<Parameter> ParametersList { get; private set; } = 
+            new ObservableCollection<Parameter>();
 
+        /// <summary>
+        /// Форма зуба
+        /// </summary>
         public ToothShapeEnum ToothShape
         {
-            get => _toothShapeEnum;
-            set
-            {
-                _toothShapeEnum = value;
-                RaisePropertyChanged(nameof(ToothShape));
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void RaisePropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            get => _toothShape;
+            set => Set(ref _toothShape, value);
         }
 
         #endregion
@@ -46,9 +52,9 @@ namespace Core
         #region Constructors
 
         /// <summary>
-        /// Создает экземпляр класса <see cref="GearParametersList"/>
+        /// Создает экземпляр класса <see cref="GearParameters"/>
         /// </summary>
-        public GearParametersList()
+        public GearParameters()
         {
             SetDefault();
         }
@@ -65,12 +71,12 @@ namespace Core
         /// <returns></returns>
         public Parameter this[ParametersEnum index]
         {
-            get => this.First(parameter => parameter.Name == index);
+            get => ParametersList.First(parameter => parameter.Name == index);
             set
             {
-                var oldParameter = this.First(parameter => parameter.Name == index);
-                var i = this.IndexOf(oldParameter);
-                this[i] = value;
+                var oldParameter = ParametersList.First(parameter => parameter.Name == index);
+                var i = ParametersList.IndexOf(oldParameter);
+                ParametersList[i] = value;
             }
         }
 
@@ -83,18 +89,18 @@ namespace Core
         /// </summary>
         public void SetDefault()
         {
-            Clear();
-            Add(new Parameter(ParametersEnum.GearDiameter, 24, 60, 40));
-            Add(new Parameter(ParametersEnum.HoleDiameter, 4, 10, 6));
-            Add(new Parameter(ParametersEnum.Height, 10, 20, 15));
-            Add(new Parameter(ParametersEnum.ToothLength, 8, 20, 12));
-            Add(new Parameter(ParametersEnum.ToothWidth, 5, 10, 8));
-            Add(new Parameter(ParametersEnum.TeethCount, 6, 10, 8));
+            ParametersList.Clear();
+            ParametersList.Add(new Parameter(ParametersEnum.GearDiameter, 24, 60, 40));
+            ParametersList.Add(new Parameter(ParametersEnum.HoleDiameter, 4, 10, 6));
+            ParametersList.Add(new Parameter(ParametersEnum.Height, 10, 20, 15));
+            ParametersList.Add(new Parameter(ParametersEnum.ToothLength, 8, 20, 12));
+            ParametersList.Add(new Parameter(ParametersEnum.ToothWidth, 5, 10, 8));
+            ParametersList.Add(new Parameter(ParametersEnum.TeethCount, 6, 10, 8));
 
             this[ParametersEnum.GearDiameter].ValueChanged += OnGearDiameterChanged;
             this[ParametersEnum.ToothWidth].ValueChanged += OnToothWidthChanged;
 
-            foreach (var parameter in this)
+            foreach (var parameter in ParametersList)
             {
                 parameter.ValidDataChanged += ValidDataChanged;
             }
@@ -142,10 +148,14 @@ namespace Core
             var currentGearDiameter = this[ParametersEnum.GearDiameter].Value;
             var toothWidth = this[ParametersEnum.ToothWidth];
 
-            var teethCount = this[ParametersEnum.TeethCount];
-            this[ParametersEnum.TeethCount] = new Parameter(teethCount.Name,
-                teethCount.Min, currentGearDiameter * 2 / toothWidth.Value,
-                teethCount.Value);
+            if (toothWidth.Value != 0)
+            {
+                var teethCount = this[ParametersEnum.TeethCount];
+                this[ParametersEnum.TeethCount] = new Parameter(teethCount.Name,
+                    teethCount.Min, currentGearDiameter * 2 / toothWidth.Value,
+                    teethCount.Value);
+            }
+            
             this[ParametersEnum.TeethCount].ValidDataChanged += ValidDataChanged;
         }
 

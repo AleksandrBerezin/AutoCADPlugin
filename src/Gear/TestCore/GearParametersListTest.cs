@@ -11,14 +11,15 @@ namespace TestCore
         public void TestSetDefault_GoodScenario()
         {
             // Arrange
-            var expected = new GearParametersList();
+            var expected = new GearParameters();
 
             // Act
-            var actual = new GearParametersList();
+            var actual = new GearParameters();
+            actual.ParametersList.Add(new Parameter(ParametersEnum.GearDiameter, 24, 60, 40));
             actual.SetDefault();
 
             // Assert
-            CollectionAssert.AreEqual(expected, actual);
+            CollectionAssert.AreEqual(expected.ParametersList, actual.ParametersList);
         }
 
         [TestCase(TestName =
@@ -29,7 +30,7 @@ namespace TestCore
             var expected = new Parameter(ParametersEnum.GearDiameter, 24, 60, 40);
 
             // Act
-            var parametersList = new GearParametersList();
+            var parametersList = new GearParameters();
             var actual = parametersList[ParametersEnum.GearDiameter];
 
             // Assert
@@ -44,7 +45,7 @@ namespace TestCore
             var expected = new Parameter(ParametersEnum.GearDiameter, 24, 60, 50);
 
             // Act
-            var parametersList = new GearParametersList
+            var parametersList = new GearParameters
             {
                 [ParametersEnum.GearDiameter] = expected
             };
@@ -62,7 +63,7 @@ namespace TestCore
             var expected = 16;
             
             // Act
-            var parametersList = new GearParametersList
+            var parametersList = new GearParameters
             {
                 [ParametersEnum.ToothWidth] =
                 {
@@ -90,7 +91,7 @@ namespace TestCore
             int expectedMin, int expectedMax, int value)
         {
             // Act
-            var parametersList = new GearParametersList
+            var parametersList = new GearParameters
             {
                 [ParametersEnum.GearDiameter] =
                 {

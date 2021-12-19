@@ -39,7 +39,7 @@ namespace Builder
         /// Построение шестерни
         /// </summary>
         /// <param name="parameters"></param>
-        public void BuildGear(GearParametersList parameters)
+        public void BuildGear(GearParameters parameters)
         {
             // Получение текущего документа и базы данных
             var activeDocument = Application.DocumentManager.MdiActiveDocument;

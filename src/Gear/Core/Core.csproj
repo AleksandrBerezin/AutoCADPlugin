@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Parameter.cs" />
-    <Compile Include="GearParametersList.cs" />
+    <Compile Include="GearParameters.cs" />
     <Compile Include="ParametersEnum.cs" />
     <Compile Include="ParametersEnumExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

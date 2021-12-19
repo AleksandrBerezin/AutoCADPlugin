@@ -9,7 +9,7 @@
     xmlns:system="clr-namespace:System;assembly=mscorlib"
     Width="241"
     Height="36"
-    d:DataContext="{d:DesignInstance core:GearParametersList}"
+    d:DataContext="{d:DesignInstance core:GearParameters}"
     mc:Ignorable="d">
     <UserControl.Resources>
         <ObjectDataProvider

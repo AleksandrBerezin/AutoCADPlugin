@@ -31,7 +31,7 @@ namespace Gear
         /// <summary>
         /// Список параметров
         /// </summary>
-        public GearParametersList GearParameters { get; } = new GearParametersList();
+        public GearParameters GearParameters { get; } = new GearParameters();
 
         /// <summary>
         /// Проверяет, корректны ли введенные данные
@@ -49,7 +49,7 @@ namespace Gear
         /// <summary>
         /// Команда построения модели
         /// </summary>
-        public RelayCommand<GearParametersList> BuildModelCommand { get; }
+        public RelayCommand<GearParameters> BuildModelCommand { get; }
 
         /// <summary>
         /// Команда установки значений параметров по умолчанию
@@ -65,11 +65,11 @@ namespace Gear
         /// </summary>
         public MainVM()
         {
-            BuildModelCommand = new RelayCommand<GearParametersList>(_builder.BuildGear);
+            BuildModelCommand = new RelayCommand<GearParameters>(_builder.BuildGear);
             SetDefaultCommand = new RelayCommand(GearParameters.SetDefault);
             GearParameters.ValidDataChanged += OnValidDataChanged;
 
-            foreach (var parameter in GearParameters)
+            foreach (var parameter in GearParameters.ParametersList)
             {
                 parameter.ValidDataChanged += OnValidDataChanged;
             }
@@ -86,7 +86,8 @@ namespace Gear
         /// <param name="e"></param>
         private void OnValidDataChanged(object sender, EventArgs e)
         {
-            if (GearParameters.Any(parameter => parameter.IsValidData == false))
+            if (GearParameters.ParametersList.Any(
+                parameter => parameter.IsValidData == false))
             {
                 IsValidData = false;
                 return;

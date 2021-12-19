@@ -37,7 +37,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <ItemsControl ItemsSource="{Binding GearParameters}">
+        <ItemsControl ItemsSource="{Binding GearParameters.ParametersList}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <local:ParameterControl>
