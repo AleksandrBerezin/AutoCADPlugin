@@ -347,9 +347,9 @@ namespace Builder
             double toothWidth)
         {
             // Угол наклона боковой стороны 15 градусов
-            var angle = 15 * Math.PI / 180;
+            var angle = 30 * Math.PI / 180;
             
-            var b = new Point2d(gearDiameter + toothLength / 2, toothWidth / 2);
+            var b = new Point2d(gearDiameter + toothLength / 2, toothWidth);
 
             var aY = b.Y;
             // Подставляем aY в уравнение окружности
