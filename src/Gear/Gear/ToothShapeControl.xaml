@@ -18,15 +18,6 @@
                 <ResourceDictionary Source="Dictionaries/ComboBoxStyleDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <ObjectDataProvider
-                x:Key="ToothShapeDataProvider"
-                MethodName="GetValues"
-                ObjectType="{x:Type system:Enum}">
-                <ObjectDataProvider.MethodParameters>
-                    <x:Type TypeName="core:ToothShapeEnum"/>
-                </ObjectDataProvider.MethodParameters>
-            </ObjectDataProvider>
-
             <local:ToothShapeToImageSourceConverter x:Key="ShapeToImageSourceConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -42,8 +33,8 @@
             </TextBox>
 
             <ComboBox
+                x:Name="ShapesComboBox"
                 Grid.Column="1"
-                ItemsSource="{Binding Source={StaticResource ToothShapeDataProvider}}"
                 SelectedItem="{Binding Path=ToothShape, Mode=TwoWay}"
                 Style="{StaticResource ComboBoxStyle}">
                 <ComboBox.ItemTemplate>

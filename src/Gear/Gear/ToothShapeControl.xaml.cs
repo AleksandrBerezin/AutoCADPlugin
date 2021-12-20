@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
+using Core;
 
 namespace Gear
 {
@@ -10,6 +12,7 @@ namespace Gear
         public ToothShapeControl()
         {
             InitializeComponent();
+            ShapesComboBox.ItemsSource = Enum.GetValues(typeof(ToothShapeEnum));
         }
     }
 }
