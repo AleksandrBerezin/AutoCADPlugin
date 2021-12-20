@@ -57,22 +57,7 @@ namespace TestCore
 
         #endregion
 
-        [TestCase(TestName =
-            "Когда вызывается метод SetDefault, значения коллекции должны установиться по умолчанию")]
-        public void TestSetDefault_GoodScenario()
-        {
-            // Arrange
-            var expected = _testParameters;
-
-            // Act
-            var gearParameters = new GearParameters();
-            gearParameters.ParametersList.Add(new Parameter(ParametersEnum.GearDiameter, 24, 60, 40));
-            gearParameters.SetDefault();
-            var actual = gearParameters.ParametersList;
-
-            // Assert
-            CollectionAssert.AreEqual(expected, actual);
-        }
+        #region Test Indexers
 
         [TestCase(TestName =
             "При получении значения с помощью индексатора возвращается соответствующий параметр")]
@@ -107,13 +92,34 @@ namespace TestCore
             Assert.AreEqual(expected, actual);
         }
 
+        #endregion
+
+        #region Test Methods
+
+        [TestCase(TestName =
+            "Когда вызывается метод SetDefault, значения коллекции должны установиться по умолчанию")]
+        public void TestSetDefault_GoodScenario()
+        {
+            // Arrange
+            var expected = _testParameters;
+
+            // Act
+            var gearParameters = new GearParameters();
+            gearParameters.ParametersList.Add(new Parameter(ParametersEnum.GearDiameter, 24, 60, 40));
+            gearParameters.SetDefault();
+            var actual = gearParameters.ParametersList;
+
+            // Assert
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
         [TestCase(TestName = "При изменении значения ширины зубца, должно измениться" +
                              " максимальное значение для количества зубцов")]
         public void TestOnToothWidthChanged_ChangeMaxTeethCount()
         {
             // Arrange
             var expected = 16;
-            
+
             // Act
             var parametersList = new GearParameters
             {
@@ -161,5 +167,7 @@ namespace TestCore
                 Assert.AreEqual(expectedMax, actualMax);
             });
         }
+
+        #endregion
     }
 }
