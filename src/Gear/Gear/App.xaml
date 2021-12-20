@@ -3,12 +3,5 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Gear"
              StartupUri="MainWindow.xaml">
-    <Application.Resources>
-         <ResourceDictionary>
-             <ResourceDictionary.MergedDictionaries>
-                 <ResourceDictionary Source="Dictionaries/TextBoxStyleDictionary.xaml"/>
-                 <ResourceDictionary Source="Dictionaries/ComboBoxStyleDictionary.xaml"/>
-             </ResourceDictionary.MergedDictionaries>
-         </ResourceDictionary>
-    </Application.Resources>
+
 </Application>

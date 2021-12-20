@@ -12,16 +12,23 @@
     d:DataContext="{d:DesignInstance core:GearParameters}"
     mc:Ignorable="d">
     <UserControl.Resources>
-        <ObjectDataProvider
-            x:Key="DataProvider"
-            MethodName="GetValues"
-            ObjectType="{x:Type system:Enum}">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="core:ToothShapeEnum"/>
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Dictionaries/TextBoxStyleDictionary.xaml"/>
+                <ResourceDictionary Source="Dictionaries/ComboBoxStyleDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
 
-        <local:ToothShapeToImageSourceConverter x:Key="ShapeToImageSourceConverter"/>
+            <ObjectDataProvider
+                x:Key="ToothShapeDataProvider"
+                MethodName="GetValues"
+                ObjectType="{x:Type system:Enum}">
+                <ObjectDataProvider.MethodParameters>
+                    <x:Type TypeName="core:ToothShapeEnum"/>
+                </ObjectDataProvider.MethodParameters>
+            </ObjectDataProvider>
+
+            <local:ToothShapeToImageSourceConverter x:Key="ShapeToImageSourceConverter"/>
+        </ResourceDictionary>
     </UserControl.Resources>
 
     <Grid>
@@ -36,7 +43,7 @@
 
             <ComboBox
                 Grid.Column="1"
-                ItemsSource="{Binding Source={StaticResource DataProvider}}"
+                ItemsSource="{Binding Source={StaticResource ToothShapeDataProvider}}"
                 SelectedItem="{Binding Path=ToothShape, Mode=TwoWay}"
                 Style="{StaticResource ComboBoxStyle}">
                 <ComboBox.ItemTemplate>
