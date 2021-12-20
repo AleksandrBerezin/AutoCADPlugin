@@ -24,7 +24,7 @@ namespace Core
         /// <summary>
         /// Список параметров
         /// </summary>
-        public ObservableCollection<Parameter> ParametersList { get; private set; } = 
+        public ObservableCollection<Parameter> ParametersList { get; } = 
             new ObservableCollection<Parameter>();
 
         /// <summary>

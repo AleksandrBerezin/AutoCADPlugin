@@ -1,25 +1,77 @@
-﻿using Core;
+﻿using System.Collections.ObjectModel;
+using Core;
 using NUnit.Framework;
 
 namespace TestCore
 {
     [TestFixture]
-    public class GearParametersListTest
+    public class GearParametersTest
     {
+        #region Constants
+
+        private ObservableCollection<Parameter> _testParameters =>
+            new ObservableCollection<Parameter>
+            {
+                new Parameter(ParametersEnum.GearDiameter, 24, 60, 40),
+                new Parameter(ParametersEnum.HoleDiameter, 4, 10, 6),
+                new Parameter(ParametersEnum.Height, 10, 20, 15),
+                new Parameter(ParametersEnum.ToothLength, 8, 20, 12),
+                new Parameter(ParametersEnum.ToothWidth, 5, 10, 8),
+                new Parameter(ParametersEnum.TeethCount, 6, 10, 8)
+            };
+
+        #endregion
+
+        #region Test Properties
+
+        [TestCase(TestName = "Позитивный тест геттера ParametersList")]
+        public void TestParametersListGet_GoodScenario()
+        {
+            // Arrange
+            var expected = _testParameters;
+
+            // Act
+            var gearParameters = new GearParameters();
+            var actual = gearParameters.ParametersList;
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestCase(TestName = "Позитивный тест геттера и сеттера ToothShape")]
+        public void TestToothShapeGetSet_GoodScenario()
+        {
+            // Arrange
+            var expected = ToothShapeEnum.Triangle;
+
+            // Act
+            var gearParameters = new GearParameters
+            {
+                ToothShape = expected
+            };
+            var actual = gearParameters.ToothShape;
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        #endregion
+
         [TestCase(TestName =
             "Когда вызывается метод SetDefault, значения коллекции должны установиться по умолчанию")]
         public void TestSetDefault_GoodScenario()
         {
             // Arrange
-            var expected = new GearParameters();
+            var expected = _testParameters;
 
             // Act
-            var actual = new GearParameters();
-            actual.ParametersList.Add(new Parameter(ParametersEnum.GearDiameter, 24, 60, 40));
-            actual.SetDefault();
+            var gearParameters = new GearParameters();
+            gearParameters.ParametersList.Add(new Parameter(ParametersEnum.GearDiameter, 24, 60, 40));
+            gearParameters.SetDefault();
+            var actual = gearParameters.ParametersList;
 
             // Assert
-            CollectionAssert.AreEqual(expected.ParametersList, actual.ParametersList);
+            CollectionAssert.AreEqual(expected, actual);
         }
 
         [TestCase(TestName =

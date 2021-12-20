@@ -69,7 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GearParametersListTest.cs" />
+    <Compile Include="GearParametersTest.cs" />
     <Compile Include="ParameterTest.cs" />
     <Compile Include="ParametersEnumExtensionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
