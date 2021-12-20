@@ -65,6 +65,7 @@ namespace Builder
                     var toothLength = parameters[ParametersEnum.ToothLength].Value;
                     var toothWidth = parameters[ParametersEnum.ToothWidth].Value;
                     var teethCount = parameters[ParametersEnum.TeethCount].Value;
+                    var toothShape = parameters.ToothShape;
 
                     // Создание шестерни с отверстием
                     var gear = CreateGearWithHole(gearDiameter, holeDiameter, height);
@@ -74,7 +75,8 @@ namespace Builder
                     SubtractDeepeningFromGear(gear, deepening, height);
 
                     // Создание зубов и добавление к объекту шестерни
-                    var tooth = Create3DTooth(gearDiameter, toothLength, toothWidth, height);
+                    var tooth = Create3DTooth(gearDiameter, toothLength, toothWidth,
+                        height, toothShape);
                     CreateTeethPolarArray(gear, tooth, teethCount);
 
                     // Добавление нового объекта в таблицу
@@ -193,34 +195,28 @@ namespace Builder
         /// <param name="toothLength"></param>
         /// <param name="toothWidth"></param>
         /// <returns></returns>
-        private Polyline Create2DTooth(double gearDiameter, double toothLength, double toothWidth)
+        private Polyline Create2DTooth(double gearDiameter, double toothLength,
+            double toothWidth, ToothShapeEnum toothShape)
         {
-            // Угол наклона боковой стороны 15 градусов
-            var angle = 15 * Math.PI / 180;
-
-            var gearWithToothLength = gearDiameter + toothLength;
-
-            var b = new Point2d(gearWithToothLength, toothWidth / 2);
-            var c = new Point2d(b.X, -b.Y);
-
-            var aY = b.Y + toothLength * Math.Tan(angle);
-            // Подставляем aY в уравнение окружности
-            var aX = Math.Sqrt(gearDiameter * gearDiameter - aY * aY);
-
-            var a = new Point2d(aX, aY);
-            var d = new Point2d(a.X, -a.Y);
-
-            // Создание трапеции в виде замкнутой ломаной линии
-            var polyline = new Polyline();
-            polyline.SetDatabaseDefaults();
-            polyline.AddVertexAt(0, a, 0, 0, 0);
-            polyline.AddVertexAt(1, b, 0, 0, 0);
-            polyline.AddVertexAt(2, c, 0, 0, 0);
-            polyline.AddVertexAt(3, d, 0, 0, 0);
-
-            polyline.Closed = true;
-
-            return polyline;
+            switch (toothShape)
+            {
+                case ToothShapeEnum.Trapezoid:
+                {
+                    return CreateTrapezoidTooth(gearDiameter, toothLength, toothWidth);
+                }
+                case ToothShapeEnum.Triangle:
+                {
+                    return CreateTriangleTooth(gearDiameter, toothLength, toothWidth);
+                }
+                case ToothShapeEnum.TrapezoidRectangle:
+                {
+                    return CreateTrapezoidRectangleTooth(gearDiameter, toothLength, toothWidth);
+                }
+                default:
+                {
+                    return CreateTrapezoidTooth(gearDiameter, toothLength, toothWidth);
+                }
+            }
         }
 
         /// <summary>
@@ -231,9 +227,11 @@ namespace Builder
         /// <param name="toothWidth"></param>
         /// <param name="height"></param>
         /// <returns></returns>
-        private Solid3d Create3DTooth(double gearDiameter, double toothLength, double toothWidth, double height)
+        private Solid3d Create3DTooth(double gearDiameter, double toothLength,
+            double toothWidth, double height, ToothShapeEnum toothShape)
         {
-            var polyline = Create2DTooth(gearDiameter, toothLength, toothWidth);
+            var polyline = Create2DTooth(gearDiameter, toothLength, toothWidth,
+                toothShape);
 
             // Добавление ломаной линии в массив объектов
             var objectCollection = new DBObjectCollection();
@@ -264,9 +262,122 @@ namespace Builder
             for (int i = 0; i < teethCount; i++)
             {
                 var newTooth = tooth.Clone() as Solid3d;
-                newTooth.TransformBy(Matrix3d.Rotation(angle * i, Vector3d.ZAxis, Point3d.Origin));
+                newTooth.TransformBy(Matrix3d.Rotation(angle * i, Vector3d.ZAxis,
+                    Point3d.Origin));
                 gear.BooleanOperation(BooleanOperationType.BoolUnite, newTooth);
             }
+        }
+
+        /// <summary>
+        /// Зуб имеет форму трапеции. Точки A и D - вершины нижнего основания.
+        /// Точки B и C - вершины верхнего основания.
+        /// </summary>
+        /// <param name="gearDiameter"></param>
+        /// <param name="toothLength"></param>
+        /// <param name="toothWidth"></param>
+        /// <returns></returns>
+        private Polyline CreateTrapezoidTooth(double gearDiameter, double toothLength,
+            double toothWidth)
+        {
+            // Угол наклона боковой стороны 15 градусов
+            var angle = 15 * Math.PI / 180;
+            
+            var b = new Point2d(gearDiameter + toothLength, toothWidth / 2);
+            var c = new Point2d(b.X, -b.Y);
+
+            var aY = b.Y + toothLength * Math.Tan(angle);
+            // Подставляем aY в уравнение окружности
+            var aX = Math.Sqrt(gearDiameter * gearDiameter - aY * aY);
+
+            var a = new Point2d(aX, aY);
+            var d = new Point2d(a.X, -a.Y);
+
+            // Создание трапеции в виде замкнутой ломаной линии
+            var polyline = new Polyline();
+            polyline.SetDatabaseDefaults();
+            polyline.AddVertexAt(0, a, 0, 0, 0);
+            polyline.AddVertexAt(1, b, 0, 0, 0);
+            polyline.AddVertexAt(2, c, 0, 0, 0);
+            polyline.AddVertexAt(3, d, 0, 0, 0);
+
+            polyline.Closed = true;
+
+            return polyline;
+        }
+
+        /// <summary>
+        /// Зуб имеет форму треугольника. Точки A и C - вершины основания.
+        /// </summary>
+        /// <param name="gearDiameter"></param>
+        /// <param name="toothLength"></param>
+        /// <param name="toothWidth"></param>
+        /// <returns></returns>
+        private Polyline CreateTriangleTooth(double gearDiameter, double toothLength,
+            double toothWidth)
+        {
+            var aY = toothWidth;
+            // Подставляем aY в уравнение окружности
+            var aX = Math.Sqrt(gearDiameter * gearDiameter - aY * aY);
+
+            var a = new Point2d(aX, aY);
+            var b = new Point2d(gearDiameter + toothLength, 0);
+            var c = new Point2d(a.X, -a.Y);
+
+            // Создание трапеции в виде замкнутой ломаной линии
+            var polyline = new Polyline();
+            polyline.SetDatabaseDefaults();
+            polyline.AddVertexAt(0, a, 0, 0, 0);
+            polyline.AddVertexAt(1, b, 0, 0, 0);
+            polyline.AddVertexAt(2, c, 0, 0, 0);
+
+            polyline.Closed = true;
+
+            return polyline;
+        }
+
+        /// <summary>
+        /// Зуб состоит из прямоугольника и трапеции. A, B, E, F - вершины прямоугольника.
+        /// B, C, D, E - вершины трапеции.
+        /// </summary>
+        /// <param name="gearDiameter"></param>
+        /// <param name="toothLength"></param>
+        /// <param name="toothWidth"></param>
+        /// <returns></returns>
+        private Polyline CreateTrapezoidRectangleTooth(double gearDiameter, double toothLength,
+            double toothWidth)
+        {
+            // Угол наклона боковой стороны 15 градусов
+            var angle = 15 * Math.PI / 180;
+            
+            var b = new Point2d(gearDiameter + toothLength / 2, toothWidth / 2);
+
+            var aY = b.Y;
+            // Подставляем aY в уравнение окружности
+            var aX = Math.Sqrt(gearDiameter * gearDiameter - aY * aY);
+
+            var a = new Point2d(aX, aY);
+
+            var cY = b.Y - toothLength / 2 * Math.Tan(angle);
+            var cX = gearDiameter + toothLength;
+            var c = new Point2d(cX, cY);
+            
+            var d = new Point2d(c.X, -c.Y);
+            var e = new Point2d(b.X, -b.Y);
+            var f = new Point2d(a.X, -a.Y);
+
+            // Создание трапеции в виде замкнутой ломаной линии
+            var polyline = new Polyline();
+            polyline.SetDatabaseDefaults();
+            polyline.AddVertexAt(0, a, 0, 0, 0);
+            polyline.AddVertexAt(1, b, 0, 0, 0);
+            polyline.AddVertexAt(2, c, 0, 0, 0);
+            polyline.AddVertexAt(3, d, 0, 0, 0);
+            polyline.AddVertexAt(4, e, 0, 0, 0);
+            polyline.AddVertexAt(5, f, 0, 0, 0);
+
+            polyline.Closed = true;
+
+            return polyline;
         }
     }
 }
