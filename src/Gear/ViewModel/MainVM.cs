@@ -5,7 +5,7 @@ using Core;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 
-namespace Gear
+namespace ViewModel
 {
     /// <summary>
     /// Модель представления главного окна

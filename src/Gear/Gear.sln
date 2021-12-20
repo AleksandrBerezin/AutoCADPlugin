@@ -20,6 +20,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{
 		Libraries\AcMgd.dll = Libraries\AcMgd.dll
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel", "ViewModel\ViewModel.csproj", "{246E1EC6-1ED9-47D1-9A5E-C45D4295F6DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,6 +48,10 @@ Global
 		{052D035E-D630-445E-8C27-DF82A3BB0F1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{052D035E-D630-445E-8C27-DF82A3BB0F1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{052D035E-D630-445E-8C27-DF82A3BB0F1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{246E1EC6-1ED9-47D1-9A5E-C45D4295F6DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{246E1EC6-1ED9-47D1-9A5E-C45D4295F6DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{246E1EC6-1ED9-47D1-9A5E-C45D4295F6DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{246E1EC6-1ED9-47D1-9A5E-C45D4295F6DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

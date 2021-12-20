@@ -1,4 +1,6 @@
-﻿namespace Gear
+﻿using ViewModel;
+
+namespace Gear
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

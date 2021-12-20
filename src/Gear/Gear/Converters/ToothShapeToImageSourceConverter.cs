@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Data;
 using Core;
 
-namespace Gear
+namespace Gear.Converters
 {
     /// <summary>
     /// Класс для преобразования формы зуба в соответствующую картинку

@@ -85,7 +85,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ToothShapeToImageConverter.cs" />
+    <Compile Include="Converters\ToothShapeToImageSourceConverter.cs" />
     <Compile Include="ToothShapeControl.xaml.cs">
       <DependentUpon>ToothShapeControl.xaml</DependentUpon>
     </Compile>
@@ -105,7 +105,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainVM.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -163,6 +162,10 @@
     <ProjectReference Include="..\GearBuilder\Builder.csproj">
       <Project>{0ec9a5ff-ae96-455b-8f02-2e629db57d48}</Project>
       <Name>Builder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj">
+      <Project>{246E1EC6-1ED9-47D1-9A5E-C45D4295F6DA}</Project>
+      <Name>ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

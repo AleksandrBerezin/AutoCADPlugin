@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Gear"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="clr-namespace:ViewModel;assembly=ViewModel"
     Title="Spur Gear Modeling"
     Width="700"
     Height="544"
@@ -12,7 +13,7 @@
     MinHeight="544"
     MaxWidth="700"
     MaxHeight="544"
-    d:DataContext="{d:DesignInstance local:MainVM}"
+    d:DataContext="{d:DesignInstance viewModel:MainVM}"
     FontSize="16"
     Icon="Resources/GearIcon.png"
     mc:Ignorable="d">
@@ -46,7 +47,10 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <local:ToothShapeControl Grid.Row="1" Grid.Column="0" DataContext="{Binding GearParameters}"/>
+        <local:ToothShapeControl
+            Grid.Row="1"
+            Grid.Column="0"
+            DataContext="{Binding GearParameters}"/>
 
         <StackPanel
             Grid.Row="2"
