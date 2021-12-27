@@ -41,6 +41,7 @@
     <Reference Include="AcMgd">
       <HintPath>..\Libraries\AcMgd.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -58,6 +59,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{237249ef-409d-4697-ba53-46c6ed457d09}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GearBuilder\Builder.csproj">
+      <Project>{0ec9a5ff-ae96-455b-8f02-2e629db57d48}</Project>
+      <Name>Builder</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Gear\Gear.csproj">
       <Project>{73ecbb3b-0f72-43df-8c96-9b6c2f37a8dc}</Project>
       <Name>Gear</Name>
