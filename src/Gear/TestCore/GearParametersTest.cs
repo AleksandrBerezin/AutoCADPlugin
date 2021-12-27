@@ -105,7 +105,8 @@ namespace TestCore
 
             // Act
             var gearParameters = new GearParameters();
-            gearParameters.ParametersList.Add(new Parameter(ParametersEnum.GearDiameter, 24, 60, 40));
+            gearParameters.ParametersList.Add(
+                new Parameter(ParametersEnum.GearDiameter, 24, 60, 40));
             gearParameters.SetDefault();
             var actual = gearParameters.ParametersList;
 
