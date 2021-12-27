@@ -38,7 +38,7 @@ namespace AutoCADConnector
                 var usedMemory = (computerInfo.TotalPhysicalMemory - computerInfo.AvailablePhysicalMemory) *
                                  0.000000000931322574615478515625;
                 streamWriter.WriteLine(
-                    $"{++count}\t{stopWatch.Elapsed:hh\\:mm\\:ss}\t{usedMemory}");
+                    $"{++count}\t{stopWatch.Elapsed:hh\\:mm\\:ss\\.fff}\t{usedMemory}");
                 streamWriter.Flush();
             }
         }
