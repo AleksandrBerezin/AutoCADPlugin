@@ -195,6 +195,7 @@ namespace Builder
         /// <param name="gearDiameter"></param>
         /// <param name="toothLength"></param>
         /// <param name="toothWidth"></param>
+        /// <param name="toothShape"></param>
         /// <returns></returns>
         private Polyline Create2DTooth(double gearDiameter, double toothLength,
             double toothWidth, ToothShapeEnum toothShape)
@@ -228,6 +229,7 @@ namespace Builder
         /// <param name="toothLength"></param>
         /// <param name="toothWidth"></param>
         /// <param name="height"></param>
+        /// <param name="toothShape"></param>
         /// <returns></returns>
         private Solid3d Create3DTooth(double gearDiameter, double toothLength,
             double toothWidth, double height, ToothShapeEnum toothShape)
